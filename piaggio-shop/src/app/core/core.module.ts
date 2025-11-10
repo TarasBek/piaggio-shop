@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
@@ -8,7 +9,7 @@ import { AvatarModule } from 'primeng/avatar';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
-  imports: [CommonModule, ButtonModule, ToolbarModule,AvatarModule],
+  imports: [CommonModule, ButtonModule, ToolbarModule,AvatarModule, SharedModule],
   exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}
