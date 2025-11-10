@@ -1,0 +1,66 @@
+:host {
+  display: block;
+}
+
+.filter-section {
+  display: flex;
+  justify-content: center;
+  margin-top: -40px; /* трохи заходить на зображення */
+  padding: 0 16px;
+}
+
+.filter-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 24px 32px;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+}
+
+.filter-container h2 {
+  color: #0e5c6a;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+:host ::ng-deep .filter-control .p-select {
+  width: 200px;
+}
+
+.filter-control {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #fdfdfd;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+}
+
+.filter-control label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0e5c6a;
+  text-align: left;
+}
+
+.filter-button {
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #f8f8f8;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 74vh; /* можна змінювати на 50vh або 70vh */
+  background-image: url("../../../../../images/VespaPrimaveraOcean.avif");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.35); /* легке затемнення для контрасту */
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.text-main {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  line-height: 1.3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+:host ::ng-deep ve-button.button2 .p-button {
+  background-color: #2b7f8b;
+  border-color: #2b7f8b;
+  color: #fff;
+}
+
+:host ::ng-deep ve-button.button2 .p-button:hover {
+  background-color: #3597a5;
+  border-color: #3597a5;
+}

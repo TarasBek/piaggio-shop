@@ -1,0 +1,9 @@
+<button
+  type="button"
+  class="app-btn"
+  [ngClass]="type"
+  [disabled]="disabled"
+>
+  <span class="btn-icon" *ngIf="icon" [ngClass]="icon" aria-hidden="true"></span>
+  <span class="btn-label">{{ label }}</span>
+</button>
