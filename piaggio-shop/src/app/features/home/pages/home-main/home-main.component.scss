@@ -2,19 +2,95 @@
   display: block;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding-bottom: 64px;
+}
+
+.hero {
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 32px;
+  overflow: hidden;
+  padding: 0 16px;
+}
+
+:host ::ng-deep .hero .p-carousel {
+  width: 100%;
+}
+
+:host ::ng-deep .hero .p-carousel-content {
+  padding: 0;
+}
+
+:host ::ng-deep .hero .p-carousel-items-container {
+  border-radius: 32px;
+}
+
+.hero-slide {
+  position: relative;
+  min-height: 420px;
+  border-radius: 32px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(5, 40, 47, 0.9), rgba(5, 40, 47, 0.4));
+}
+
+.hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px;
+  color: #fff;
+  max-width: 540px;
+}
+
+.hero-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
 .filter-section {
   display: flex;
   justify-content: center;
-  margin-top: -40px; /* трохи заходить на зображення */
+  margin-top: -60px;
   padding: 0 16px;
+  width: 100%;
 }
 
 .filter-container {
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 24px 32px;
-  max-width: 900px;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(5, 40, 47, 0.12);
+  padding: 32px;
+  max-width: 1000px;
   width: 100%;
   text-align: center;
   z-index: 2;
@@ -22,29 +98,27 @@
 
 .filter-container h2 {
   color: #0e5c6a;
-  font-size: 1.8rem;
-  margin-bottom: 8px;
-  font-weight: 700;
+  font-size: 1.9rem;
+  margin-bottom: 16px;
 }
 
 .filters {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
-  margin-top: 15px;
+  gap: 16px;
 }
 
 :host ::ng-deep .filter-control .p-select {
-  width: 200px;
+  width: 220px;
 }
 
 .filter-control {
   padding: 12px 20px;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid #e2e8f0;
   background: #fdfdfd;
-  min-width: 200px;
+  min-width: 220px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -63,4 +137,234 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.home-section {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 16px 48px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: #0e5c6a;
+  margin: 0;
+}
+
+.section-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  color: #2b7a78;
+  margin: 0 0 6px;
+}
+
+.section-link {
+  color: #0e5c6a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+:host ::ng-deep .p-carousel {
+  width: 100%;
+}
+
+:host ::ng-deep .p-carousel-content {
+  gap: 12px;
+}
+
+:host ::ng-deep .p-carousel-items-content {
+  padding: 8px 0;
+}
+
+.category-card,
+.product-card,
+.blog-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 12px 40px rgba(11, 61, 68, 0.08);
+  border: 1px solid #edf2f7;
+  height: 100%;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.category-card img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.category-card h3 {
+  margin: 0;
+  color: #0e5c6a;
+  font-size: 1.1rem;
+}
+
+.category-card p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.product-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #0e5c6a;
+}
+
+.product-info .price {
+  margin: 4px 0;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #0e5c6a;
+}
+
+.availability {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c7a7b;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.benefit-card {
+  background: #f7fafc;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid #e2e8f0;
+}
+
+.benefit-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.benefit-card h3 {
+  margin: 0;
+  color: #0e5c6a;
+  font-size: 1.05rem;
+}
+
+.benefit-card p {
+  margin: 4px 0 0;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.blog-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.blog-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.blog-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.blog-date {
+  font-size: 0.85rem;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.blog-body h3 {
+  margin: 0;
+  color: #0e5c6a;
+  font-size: 1.2rem;
+}
+
+.blog-body p {
+  margin: 0;
+  color: #4a5568;
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 32px;
+  }
+
+  .filter-container {
+    padding: 24px;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-control {
+    width: 100%;
+  }
+
+  :host ::ng-deep .filter-control .p-select {
+    width: 100%;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-link {
+    margin-top: -8px;
+  }
 }

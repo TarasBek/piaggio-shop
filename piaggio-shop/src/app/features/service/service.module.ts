@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ServiceRoutingModule } from './service-routing.module';
 import { ServiceListComponent } from './pages/service-list/service-list.component';
 import { BookingComponent } from './pages/booking/booking.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { BookingComponent } from './pages/booking/booking.component';
   ],
   imports: [
     CommonModule,
-    ServiceRoutingModule
+    ServiceRoutingModule,
+    SharedModule
   ]
 })
 export class ServiceModule { }

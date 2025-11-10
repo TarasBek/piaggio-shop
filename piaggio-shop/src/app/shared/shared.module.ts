@@ -4,21 +4,11 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ButtonComponent } from './components/button/button.component';
 import { Button, ButtonModule } from 'primeng/button';
-
-
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
-  declarations: [
-    ProductCardComponent,
-    SearchBarComponent,
-    ButtonComponent
-  ],
-  imports: [
-    CommonModule,
-    ButtonModule
-  ],
-  exports:[
-    ButtonComponent
-  ]
+  declarations: [ProductCardComponent, SearchBarComponent, ButtonComponent],
+  imports: [CommonModule, ButtonModule, CarouselModule],
+  exports: [ButtonComponent, CarouselModule],
 })
-export class SharedModule { }
+export class SharedModule {}
