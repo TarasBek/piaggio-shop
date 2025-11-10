@@ -17,12 +17,12 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
-        data: { title: 'Piaggio Shop — Вхід' },
+        data: { title: 'Piaggio Shop — Login' },
       },
       {
         path: 'register',
         component: RegisterComponent,
-        data: { title: 'Piaggio Shop — Реєстрація' },
+        data: { title: 'Piaggio Shop — Register' },
       },
     ],
   },

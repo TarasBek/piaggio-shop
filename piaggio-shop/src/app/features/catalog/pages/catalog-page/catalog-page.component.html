@@ -1,1 +1,350 @@
-<p>catalog-page works!</p>
+<div class="catalog-page">
+  <section class="catalog-hero">
+    <div class="hero-content">
+      <p class="eyebrow">All parts catalog</p>
+      <h1>Find the right component for every Vespa & Piaggio ride</h1>
+      <p class="description">
+        Filter by model, system, or availability and get genuine recommendations from our mechanics team.
+      </p>
+      <div class="hero-actions">
+        <input
+          type="search"
+          placeholder="Search by part name or SKU"
+          [(ngModel)]="searchTerm"
+        />
+        <ve-button label="Search catalog" type="primary"></ve-button>
+      </div>
+      <div class="hero-highlights">
+        @for (item of heroHighlights; track item.label) {
+          <span>
+            <strong>{{ item.icon }}</strong>
+            {{ item.label }}
+          </span>
+        }
+      </div>
+    </div>
+  </section>
+
+  <nav class="category-tabs" aria-label="Catalog categories">
+    @for (category of categories; track category.id) {
+      <button
+        type="button"
+        [class.active]="category.id === selectedCategoryId"
+        (click)="selectCategory(category.id)"
+      >
+        {{ category.label }}
+      </button>
+    }
+  </nav>
+
+  @if (appliedFilters().length) {
+    <section class="applied-filters">
+      @for (chip of appliedFilters(); track chip.label) {
+        <button type="button" class="filter-chip" (click)="removeFilter(chip.group, chip.label)">
+          {{ chip.label }}
+          <span aria-hidden="true">✕</span>
+        </button>
+      }
+      <button class="clear-all" type="button" (click)="clearAllFilters()">Clear all</button>
+    </section>
+  }
+
+  <section class="subcategory-showcase" *ngIf="activeCategory">
+    <div class="subcategory-header">
+      <div>
+        <p class="eyebrow">{{ activeCategory.label }}</p>
+        <h2>Subcategories</h2>
+      </div>
+      <span class="product-count">{{ products.length }} products</span>
+    </div>
+    <ng-container *ngIf="activeSections.length; else subcategoryGrid">
+      <div class="section-card-grid">
+        @for (section of activeSections; track section.id) {
+          <button
+            type="button"
+            class="section-card"
+            [class.active]="isSectionSelected(section.id)"
+            (click)="selectSection(section.id)"
+          >
+            <div
+              class="section-image"
+              [class.has-image]="section.image"
+              [style.background-image]="section.image ? 'url(' + section.image + ')' : ''"
+            ></div>
+            <span>{{ section.label }}</span>
+          </button>
+        }
+      </div>
+
+      <section class="section-detail" *ngIf="selectedSection as detailSection">
+        <header>
+          <div>
+            <p class="eyebrow">{{ detailSection.label }}</p>
+            <h3>
+              @if (selectedItemLabel) {
+                Selected: <span class="selected-label">{{ selectedItemLabel }}</span>
+              } @else {
+                Choose a subcategory
+              }
+            </h3>
+          </div>
+          <button type="button" class="clear-selection" (click)="clearSubcategorySelection()">Show all</button>
+        </header>
+        <div class="section-detail-columns">
+          @for (item of detailSection.items; track item.id) {
+            <div class="detail-column">
+              <button
+                type="button"
+                class="subcategory-pill"
+                [class.active]="!item.children?.length && item.id === selectedSubcategoryId"
+                (click)="item.children?.length ? toggleItem(item.id) : selectSubcategory(item.id, item.label)"
+              >
+                {{ item.label }}
+                <span
+                  *ngIf="item.children?.length"
+                  class="chevron small"
+                  [class.expanded]="isItemExpanded(item.id)"
+                ></span>
+              </button>
+              <ul class="detail-list" *ngIf="item.children?.length && isItemExpanded(item.id)">
+                @for (child of item.children; track child.id) {
+                  <li>
+                    <button
+                      type="button"
+                      [class.active]="child.id === selectedSubcategoryId"
+                      (click)="selectSubcategory(child.id, child.label)"
+                    >
+                      {{ child.label }}
+                    </button>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </section>
+    </ng-container>
+    <ng-template #subcategoryGrid>
+      <div class="subcategory-grid" *ngIf="activeSubcategories.length">
+        @for (subcategory of activeSubcategories; track subcategory.id) {
+          <button
+            type="button"
+            class="subcategory-card"
+            (click)="selectSubcategory(subcategory.id, subcategory.label)"
+            [class.active]="subcategory.id === selectedSubcategoryId"
+          >
+            <img
+              [src]="subcategory.image"
+              [alt]="subcategory.label"
+              loading="lazy"
+              appFallbackImg="category"
+            />
+            <span>{{ subcategory.label }}</span>
+          </button>
+        }
+      </div>
+    </ng-template>
+  </section>
+
+  <div class="catalog-layout">
+    <aside class="filters-panel">
+      <div class="category-list">
+        <h3>Categories</h3>
+        <ul>
+          @for (category of categories; track category.id) {
+            <li>
+              <button
+                type="button"
+                [class.active]="category.id === selectedCategoryId"
+                (click)="selectCategory(category.id)"
+              >
+                {{ category.label }}
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="subcategory-list" *ngIf="filterSubcategories.length">
+        <div class="subcategories-header">
+          <h4>Subcategories</h4>
+          <span
+            *ngIf="filterSubcategories.length > 5"
+            class="toggle-chip-view"
+            role="button"
+            tabindex="0"
+            (click)="showAllSidebarSubcategories = !showAllSidebarSubcategories"
+            (keydown.enter)="showAllSidebarSubcategories = !showAllSidebarSubcategories"
+          >
+            {{ showAllSidebarSubcategories ? 'Hide' : 'View all' }}
+          </span>
+        </div>
+        <div class="subcategory-chip-grid" [class.collapsed]="!showAllSidebarSubcategories">
+          @for (subcategory of filterSubcategories; track subcategory.id) {
+            <button
+              type="button"
+              class="subcategory-chip"
+              [class.active]="subcategory.id === selectedSubcategoryId"
+              (click)="selectSubcategory(subcategory.id, subcategory.label)"
+            >
+              {{ subcategory.label }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="filters-header">
+        <h2>Filters</h2>
+        <button type="button" (click)="clearAllFilters()">Reset</button>
+      </div>
+
+      <div class="filter-group">
+        <label>Price range (€)</label>
+        <div class="price-inputs">
+          <input
+            type="number"
+            [min]="priceLimits.min"
+            [max]="priceRange.max - 10"
+            [value]="priceRange.min"
+            (input)="updatePriceRange('min', $event)"
+          />
+          <span>—</span>
+          <input
+            type="number"
+            [min]="priceRange.min + 10"
+            [max]="priceLimits.max"
+            [value]="priceRange.max"
+            (input)="updatePriceRange('max', $event)"
+          />
+        </div>
+        <div class="price-slider">
+          <input
+            type="range"
+            [min]="priceLimits.min"
+            [max]="priceLimits.max"
+            [value]="priceRange.min"
+            (input)="updatePriceRange('min', $event)"
+          />
+          <input
+            type="range"
+            [min]="priceLimits.min"
+            [max]="priceLimits.max"
+            [value]="priceRange.max"
+            (input)="updatePriceRange('max', $event)"
+          />
+        </div>
+        <p class="price-hint">
+          {{ priceRange.min | currency: 'EUR' : 'symbol' : '1.0-0' }} –
+          {{ priceRange.max | currency: 'EUR' : 'symbol' : '1.0-0' }}
+        </p>
+      </div>
+
+      @for (group of filterGroups; track group) {
+        <div class="filter-group">
+          <label>{{ group | titlecase }}</label>
+          <div class="filter-buttons">
+            @for (item of filterDefinitions[group]; track item) {
+              <button
+                type="button"
+                [class.active]="isSelected(group, item)"
+                (click)="toggleFilter(group, item)"
+              >
+                {{ item }}
+              </button>
+            }
+          </div>
+        </div>
+      }
+    </aside>
+
+    <section class="catalog-results">
+      <div class="results-toolbar">
+        <div class="result-count">
+          {{ products.length }} results
+        </div>
+        <div class="toolbar-actions">
+          <label>
+            Sort by
+            <select [(ngModel)]="selectedSort">
+              @for (option of sortOptions; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+              }
+            </select>
+          </label>
+          <div class="view-toggle" role="group" aria-label="View mode">
+            <button type="button" [class.active]="viewMode === 'grid'" (click)="switchView('grid')">Grid</button>
+            <button type="button" [class.active]="viewMode === 'list'" (click)="switchView('list')">List</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-grid" [class.list]="viewMode === 'list'">
+        @if (products.length) {
+          @for (product of products; track product.id) {
+            <article class="product-card" [class.list-view]="viewMode === 'list'">
+              <button class="favorite-float" type="button" aria-label="Add to favorites">
+                <svg class="icon-heart" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M3.2 5.8a4.3 4.3 0 0 1 6.1 0L12 8.5l2.7-2.7a4.3 4.3 0 1 1 6.1 6.1L12 20.7 3.2 11.9a4.3 4.3 0 0 1 0-6.1Z"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <div class="product-media">
+                <img
+                  *ngIf="product.image && !product.imageFailed"
+                  [src]="product.image"
+                  [alt]="product.name"
+                  loading="lazy"
+                  (error)="product.imageFailed = true"
+                />
+                <div class="image-fallback" *ngIf="!product.image || product.imageFailed">
+                  <div class="fallback-graphic">
+                    <svg viewBox="0 0 48 48" aria-hidden="true">
+                      <path
+                        d="M15 16h-2.5a4.5 4.5 0 0 0-4.5 4.5V33a4.5 4.5 0 0 0 4.5 4.5h23a4.5 4.5 0 0 0 4.5-4.5V20.5A4.5 4.5 0 0 0 35.5 16H33l-1.8-3.3A3 3 0 0 0 28.8 11h-9.6a3 3 0 0 0-2.6 1.7Z"
+                      />
+                      <circle cx="24" cy="26" r="6" />
+                      <path d="M11 21h4" />
+                    </svg>
+                  </div>
+                  <p class="fallback-title">Photo unavailable</p>
+                  <span class="fallback-caption">{{ product.subcategoryLabel }}</span>
+                </div>
+                @if (product.badge) {
+                  <span class="badge">{{ product.badge }}</span>
+                }
+              </div>
+              <div class="product-body">
+                <div class="product-header">
+                  <span class="category">{{ product.subcategoryLabel }}</span>
+                  <span class="availability" [class.limited]="product.availability !== 'In stock'">
+                    {{ product.availability }}
+                  </span>
+                </div>
+                <h3 class="product-name">{{ product.name }}</h3>
+                <div class="product-footer">
+                  <div class="price-stack">
+                    <span class="price-hint">Incl. VAT</span>
+                    <p class="price">{{ product.price | currency: 'EUR' : 'symbol' : '1.0-0' }}</p>
+                  </div>
+                  <div class="card-actions">
+                    <ve-button class="add-to-cart" label="Add to cart" type="primary"></ve-button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          }
+        } @else {
+          <div class="empty-state">
+            <h3>No products match these filters</h3>
+            <p>Try adjusting your filters or clearing them to see more results.</p>
+            <ve-button label="Clear all filters" type="secondary" (click)="clearAllFilters()"></ve-button>
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+</div>

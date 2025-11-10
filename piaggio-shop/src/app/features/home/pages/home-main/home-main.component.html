@@ -1,50 +1,50 @@
 <div class="main">
  
-  <div class="filter-section" aria-label="Підбір запчастин">
+  <div class="filter-section" aria-label="Parts selector">
     <div class="filter-container">
-      <h2>Підбір запчастин за моделлю</h2>
+      <h2>Find parts by model</h2>
       <div class="filters">
         <div class="filter-control">
-          <label for="brandSelect">Марка</label>
+          <label for="brandSelect">Brand</label>
           <p-select
             inputId="brandSelect"
             [options]="brandOptions"
             optionLabel="label"
             optionValue="value"
             [(ngModel)]="selectedBrand"
-            placeholder="Оберіть марку"
+            placeholder="Choose a brand"
             [editable]="true"
             appendTo="body"
           ></p-select>
         </div>
         <div class="filter-control">
-          <label for="modelSelect">Модель</label>
+          <label for="modelSelect">Model</label>
           <p-select
             inputId="modelSelect"
             [options]="modelOptions"
             optionLabel="label"
             optionValue="value"
             [(ngModel)]="selectedModel"
-            placeholder="Оберіть модель"
+            placeholder="Choose a model"
             [editable]="true"
             appendTo="body"
           ></p-select>
         </div>
         <div class="filter-control">
-          <label for="yearSelect">Рік</label>
+          <label for="yearSelect">Year</label>
           <p-select
             inputId="yearSelect"
             [options]="yearOptions"
             optionLabel="label"
             optionValue="value"
             [(ngModel)]="selectedYear"
-            placeholder="Оберіть рік"
+            placeholder="Choose a year"
             [editable]="true"
             appendTo="body"
           ></p-select>
         </div>
         <div class="filter-button">
-          <ve-button label="Підібрати" type="primary"></ve-button>
+          <ve-button label="Find parts" type="primary"></ve-button>
         </div>
       </div>
     </div>
@@ -54,9 +54,9 @@
     <div class="section-header">
       <div>
         <p class="section-eyebrow">Popular categories</p>
-        <h2>Знайди потрібний розділ</h2>
+        <h2>Browse by category</h2>
       </div>
-      <a class="section-link" href="#">Переглянути всі</a>
+      <a class="section-link" href="#">View all</a>
     </div>
     <p-carousel
       [value]="popularCategories"
@@ -67,7 +67,12 @@
     >
       <ng-template pTemplate="item" let-category>
         <article class="category-card">
-          <img [src]="category.image" [alt]="category.title" loading="lazy" />
+          <img
+            [src]="category.image"
+            [alt]="category.title"
+            loading="lazy"
+            appFallbackImg="category"
+          />
           <div class="category-info">
             <h3>{{ category.title }}</h3>
             <p>{{ category.description }}</p>
@@ -80,10 +85,10 @@
   <section class="home-section popular-products">
     <div class="section-header">
       <div>
-        <p class="section-eyebrow">Популярні товари</p>
-        <h2>Тренди цього сезону</h2>
+        <p class="section-eyebrow">Popular products</p>
+        <h2>This season's trends</h2>
       </div>
-      <a class="section-link" href="#">Переглянути всі</a>
+      <a class="section-link" href="#">View all</a>
     </div>
     <p-carousel
       [value]="popularProducts"
@@ -94,14 +99,28 @@
     >
       <ng-template pTemplate="item" let-product>
         <article class="product-card">
-          <button class="favorite-button" type="button" aria-label="Додати в обране">♡</button>
-          <img [src]="product.image" [alt]="product.name" loading="lazy" />
+          <button class="favorite-button" type="button" aria-label="Add to favorites">
+            <svg class="icon-heart" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M3.2 5.8a4.3 4.3 0 0 1 6.1 0L12 8.5l2.7-2.7a4.3 4.3 0 1 1 6.1 6.1L12 20.7 3.2 11.9a4.3 4.3 0 0 1 0-6.1Z"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <img
+            [src]="product.image"
+            [alt]="product.name"
+            loading="lazy"
+            appFallbackImg="product"
+          />
           <div class="product-info">
             <h3>{{ product.name }}</h3>
             <p class="price">{{ product.price | currency:'UAH':'symbol-narrow':'1.0-0' }}</p>
             <span class="availability">{{ product.availability }}</span>
           </div>
-          <ve-button label="До кошика" type="primary"></ve-button>
+          <ve-button label="Add to cart" type="primary"></ve-button>
         </article>
       </ng-template>
     </p-carousel>
@@ -122,10 +141,10 @@
   <section class="home-section blog-section">
     <div class="section-header">
       <div>
-        <p class="section-eyebrow">Блог</p>
-        <h2>Історії з майстерні</h2>
+        <p class="section-eyebrow">Blog</p>
+        <h2>Stories from the workshop</h2>
       </div>
-      <a class="section-link" href="#">Читати все</a>
+      <a class="section-link" href="#">Read all</a>
     </div>
     <p-carousel
       [value]="blogPosts"
@@ -136,7 +155,12 @@
     >
       <ng-template pTemplate="item" let-post>
         <article class="blog-card">
-          <img [src]="post.image" [alt]="post.title" loading="lazy" />
+          <img
+            [src]="post.image"
+            [alt]="post.title"
+            loading="lazy"
+            appFallbackImg="blog"
+          />
           <div class="blog-body">
             <span class="blog-date">{{ post.date }}</span>
             <h3>{{ post.title }}</h3>

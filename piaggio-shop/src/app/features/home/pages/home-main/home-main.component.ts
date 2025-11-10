@@ -11,21 +11,21 @@ export class HomeMainComponent {
   heroSlides = [
     {
       eyebrow: 'Vespa & Piaggio',
-      title: 'Запчастини для твого скутера — швидко, надійно, стильно',
+      title: 'Parts for your scooter — fast, reliable, stylish',
       description:
-        'Оригінальні комплектуючі та топові аксесуари з доставкою по всій Україні.',
+        'Genuine components and top accessories with delivery across Ukraine.',
       image:
         'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80',
-      ctaLabel: 'Перейти до каталогу',
+      ctaLabel: 'Go to catalog',
     },
     {
-      eyebrow: 'Готові до сезону',
-      title: 'Підготуй Vespa до перших поїздок',
+      eyebrow: 'Season ready',
+      title: 'Prepare your Vespa for the first rides',
       description:
-        'Сервісні набори, витратні матеріали та поради від наших механіків.',
+        'Service kits, consumables, and tips from our mechanics.',
       image:
         'https://images.unsplash.com/photo-1432753759888-b30b2bdac995?auto=format&fit=crop&w=1600&q=80',
-      ctaLabel: 'Дізнатись більше',
+      ctaLabel: 'Learn more',
     },
   ];
 
@@ -56,117 +56,117 @@ export class HomeMainComponent {
 
   popularCategories = [
     {
-      title: 'Колеса',
-      description: 'Оригінальні диски та шини',
+      title: 'Wheels',
+      description: 'Original rims and tires',
       image: 'https://cdn-icons-png.flaticon.com/512/3504/3504886.png',
     },
     {
-      title: 'Двигун',
-      description: 'Витратники та апгрейди',
+      title: 'Engine',
+      description: 'Consumables and upgrades',
       image: 'https://cdn-icons-png.flaticon.com/512/1645/1645094.png',
     },
     {
-      title: 'Електрика',
-      description: 'Світло, акумулятори, wiring',
+      title: 'Electrical',
+      description: 'Lighting, batteries, wiring',
       image: 'https://cdn-icons-png.flaticon.com/512/1046/1046857.png',
     },
     {
-      title: 'Масла та фільтри',
-      description: 'Комплекти ТО на сезон',
+      title: 'Oils & filters',
+      description: 'Seasonal service kits',
       image: 'https://cdn-icons-png.flaticon.com/512/686/686589.png',
     },
     {
-      title: 'Аксесуари',
-      description: 'Ветрові скла, кофри, стиль',
+      title: 'Accessories',
+      description: 'Windscreens, top cases, style',
       image: 'https://cdn-icons-png.flaticon.com/512/2944/2944127.png',
     },
     {
-      title: 'Гальма',
-      description: 'Колодки та диски',
+      title: 'Brakes',
+      description: 'Pads and discs',
       image: 'https://cdn-icons-png.flaticon.com/512/4213/4213698.png',
     },
   ];
 
   popularProducts = [
     {
-      name: 'Переднє колесо Vespa',
+      name: 'Vespa front wheel',
       price: 1289,
       image:
         'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=600&q=80',
-      availability: 'В наявності',
+      availability: 'In stock',
     },
     {
-      name: 'Свічка NGK B6HS',
+      name: 'Spark plug NGK B6HS',
       price: 79,
       image:
         'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80',
-      availability: 'В наявності',
+      availability: 'In stock',
     },
     {
-      name: 'Повітряний фільтр',
+      name: 'Air filter',
       price: 349,
       image:
         'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=600&q=80',
-      availability: 'Обмежено',
+      availability: 'Limited',
     },
     {
-      name: 'Амортизатор передній',
+      name: 'Front shock absorber',
       price: 759,
       image:
         'https://images.unsplash.com/photo-1466112928291-0903b70a20cd?auto=format&fit=crop&w=600&q=80',
-      availability: 'Передзамовлення',
+      availability: 'Pre-order',
     },
     {
-      name: 'Сервісний ремінь Drive',
+      name: 'Drive service belt',
       price: 299,
       image:
         'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80',
-      availability: 'В наявності',
+      availability: 'In stock',
     },
   ];
 
   benefits = [
     {
       icon: '🚚',
-      title: 'Безкоштовна доставка від 100 €',
-      description: 'Надійні перевізники та швидке відправлення щодня.',
+      title: 'Free shipping from €100',
+      description: 'Trusted carriers and daily dispatch.',
     },
     {
       icon: '🛠️',
-      title: 'Оригінальні запчастини',
-      description: 'Працюємо напряму з дилерами Vespa, Piaggio, Aprilia.',
+      title: 'Genuine parts',
+      description: 'We work directly with Vespa, Piaggio, and Aprilia dealers.',
     },
     {
       icon: '💬',
-      title: 'Підтримка клієнтів',
-      description: 'Механіки допоможуть підібрати деталі під твою модель.',
+      title: 'Customer support',
+      description: 'Mechanics help you choose the right parts for your model.',
     },
   ];
 
   blogPosts = [
     {
-      title: 'Як підготувати Vespa до сезону',
-      date: '12 травня 2024',
-      excerpt: 'ТО-список, мастила, що варто перевірити перед першою поїздкою.',
+      title: 'How to prepare your Vespa for the season',
+      date: '12 May 2024',
+      excerpt: 'Maintenance checklist and fluids to inspect before the first ride.',
       image:
         'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80',
-      cta: 'V’юшком',
+      cta: 'Read',
     },
     {
-      title: 'Як обрати ідеальне вітрове скло',
-      date: '28 квітня 2024',
-      excerpt: 'Пояснюємо різницю між низькими та туринговими екранами.',
+      title: 'Choosing the perfect windscreen',
+      date: '28 April 2024',
+      excerpt: 'Explaining the difference between short and touring screens.',
       image:
         'https://images.unsplash.com/photo-1470869784051-0b7e9e87633e?auto=format&fit=crop&w=900&q=80',
-      cta: 'Читати',
+      cta: 'Read',
     },
     {
-      title: 'ТОП-5 аксесуарів для міських поїздок',
-      date: '09 квітня 2024',
-      excerpt: 'Ідеї для додаткового комфорту та безпеки у трафіку.',
+      title: 'Top 5 accessories for city rides',
+      date: '09 April 2024',
+      excerpt: 'Ideas for extra comfort and safety in traffic.',
       image:
         'https://images.unsplash.com/photo-1471440671318-55bdbb772f93?auto=format&fit=crop&w=900&q=80',
-      cta: 'Читати',
+      cta: 'Read',
     },
   ];
 

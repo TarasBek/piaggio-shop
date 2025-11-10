@@ -7,7 +7,7 @@ body {
 .hero {
   position: relative;
   width: 100%;
-  height: 74vh; /* можна змінювати на 50vh або 70vh */
+  height: 74vh; /* adjust to 50vh or 70vh if needed */
   background-image: url("../../../../../images/VespaPrimaveraOcean.avif");
   background-size: cover;
   background-position: center;
@@ -19,7 +19,7 @@ body {
 }
 
 .hero-content {
-  background: rgba(0, 0, 0, 0.35); /* легке затемнення для контрасту */
+  background: rgba(0, 0, 0, 0.35); /* slight dark overlay for contrast */
   width: 100%;
   height: 100%;
   align-items: center;

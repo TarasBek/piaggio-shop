@@ -9,7 +9,7 @@ const routes: Routes = [
     component: HomePageComponent,
     canActivateChild: [TitleRendererService],
     data: {
-      title: 'Piaggio Shop — Запчастини',
+      title: 'Piaggio Shop — Parts',
     },
   },
   // {
@@ -17,7 +17,7 @@ const routes: Routes = [
   //   component: ProductDetailComponent,
   //   canActivateChild: [TitleRendererService],
   //   data: {
-  //     title: 'Piaggio Shop — Запчастини',
+  //     title: 'Piaggio Shop — Parts',
   //   },
   // },
 ];

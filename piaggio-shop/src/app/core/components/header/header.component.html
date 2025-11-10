@@ -37,7 +37,13 @@
 
     <nav class="main-nav" aria-label="Primary navigation">
       @for (item of mainNav; track item.label) {
-        <a [routerLink]="item.link">{{ item.label }}</a>
+        <a
+          [routerLink]="item.link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.exact }"
+        >
+          {{ item.label }}
+        </a>
       }
     </nav>
 
@@ -45,8 +51,15 @@
       <button class="icon-button" type="button" aria-label="Search">
         <span aria-hidden="true">🔍</span>
       </button>
-      <button class="icon-button" type="button" aria-label="Favorites">
-        <span aria-hidden="true">♡</span>
+      <button class="icon-button favorite-button" type="button" aria-label="Favorites">
+        <svg class="icon-heart" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M3.2 5.8a4.3 4.3 0 0 1 6.1 0L12 8.5l2.7-2.7a4.3 4.3 0 1 1 6.1 6.1L12 20.7 3.2 11.9a4.3 4.3 0 0 1 0-6.1Z"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </button>
       <button class="icon-button" type="button" aria-label="Shopping cart">
         <span aria-hidden="true">🛒</span>

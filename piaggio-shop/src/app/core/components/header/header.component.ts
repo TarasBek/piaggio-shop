@@ -9,11 +9,10 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
 
   mainNav = [
-    { label: 'Catalog', link: '/catalog' },
-    { label: 'Service', link: '/service' },
-    { label: 'About Us', link: '/about' },
-    { label: 'Blog', link: '/blog' },
-    { label: 'Support', link: '/support' },
+    { label: 'Home', link: '/home', exact: true },
+    { label: 'Catalog', link: '/catalog', exact: false },
+    { label: 'Service', link: '/service', exact: false },
+    { label: 'Blog', link: '/blog', exact: false },
   ];
 
   quickLinks = [
