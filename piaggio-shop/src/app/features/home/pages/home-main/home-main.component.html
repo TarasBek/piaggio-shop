@@ -8,14 +8,18 @@
           <label for="brandSelect">Brand</label>
           <p-select
             inputId="brandSelect"
-            [options]="brandOptions"
+            [options]="(brandOptions$ | async) ?? []"
             optionLabel="label"
             optionValue="value"
             [(ngModel)]="selectedBrand"
             placeholder="Choose a brand"
             [editable]="true"
             appendTo="body"
+            [disabled]="(brandStatus$ | async) === 'loading'"
           ></p-select>
+          <small class="hint" *ngIf="(brandStatus$ | async) === 'loading'">
+            Loading brands...
+          </small>
         </div>
         <div class="filter-control">
           <label for="modelSelect">Model</label>

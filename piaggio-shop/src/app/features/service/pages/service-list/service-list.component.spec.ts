@@ -1,5 +1,10 @@
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
+import { serviceDataFeatureKey } from '../../state/service-data.models';
+import { initialState } from '../../state/service-data.reducer';
 import { ServiceListComponent } from './service-list.component';
 
 describe('ServiceListComponent', () => {
@@ -8,7 +13,15 @@ describe('ServiceListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ServiceListComponent]
+      imports: [CommonModule, FormsModule],
+      declarations: [ServiceListComponent],
+      providers: [
+        provideMockStore({
+          initialState: {
+            [serviceDataFeatureKey]: initialState,
+          },
+        }),
+      ],
     })
     .compileComponents();
 

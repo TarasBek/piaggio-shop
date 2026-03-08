@@ -1,0 +1,18 @@
+<div
+	class="checkbox-wrapper"
+	[class.disabled]="disabled"
+	[class.label-right]="labelPosition === 'right'"
+	[class.centered]="!label"
+	(click)="toggle()"
+>
+	<div *ngIf="label && labelPosition === 'left'" class="left-label" [innerHtml]="label"></div>
+	<div *ngIf="createTabindex" [tabindex]="disabled ? -1 : 1" class="checkbox">
+		<os-icon *ngIf="value === true" name="ok_small" size="small"></os-icon>
+		<os-icon *ngIf="value === null && tristate" name="no-value" size="small"></os-icon>
+	</div>
+	<div *ngIf="!createTabindex" class="checkbox">
+		<os-icon *ngIf="value === true" name="ok_small" size="small"></os-icon>
+		<os-icon *ngIf="value === false && !tristate" name="no-value" size="small"></os-icon>
+	</div>
+	<div *ngIf="label && labelPosition === 'right'" class="right-label" [innerHtml]="label"></div>
+</div>

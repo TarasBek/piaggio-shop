@@ -1,0 +1,70 @@
+:host[class~='ng-invalid']:is([class*='ng-touched']),
+:host[class~='ng-invalid']:is([class~='ng-dirty']) {
+	.checkbox-wrapper .checkbox {
+		border: 1px solid var(--alarm-orange-color);
+	}
+}
+
+.checkbox-wrapper {
+	width: 100%;
+	page-break-inside: avoid;
+	display: flex;
+
+	&.centered {
+		justify-content: center;
+	}
+
+	&:not(.disabled) {
+		@media not print {
+			&:hover {
+				cursor: pointer;
+
+				.checkbox {
+					border: 1px solid var(--input-hover-border);
+					box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+				}
+			}
+
+			&:focus-within {
+				.checkbox {
+					border: 1px solid var(--input-focus-border);
+				}
+			}
+		}
+	}
+
+	&.disabled {
+		.checkbox {
+			border: 1px solid transparent;
+			background: var(--input-disabled-background);
+		}
+	}
+
+	.checkbox {
+		display: inline-block;
+		vertical-align: middle;
+		width: 16px;
+		height: 16px;
+		line-height: 14px;
+		background: var(--input-background);
+		border: 1px solid var(--input-border);
+
+		os-icon {
+			line-height: 14px;
+		}
+	}
+
+	.left-label {
+		display: inline-block;
+		margin-left: 0;
+		margin-right: 8px;
+		text-align: right;
+	}
+
+	.right-label {
+		display: inline-block;
+		margin-left: 8px;
+		margin-right: 0;
+		text-align: left;
+	}
+}

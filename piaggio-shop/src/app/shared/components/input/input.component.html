@@ -1,0 +1,29 @@
+<div class="input-wrapper">
+	<span *ngIf="label" class="label" [innerHtml]="label"></span>
+	<div class="input-row" [class.number]="isNumber" [class.rtl]="rtl" [class.disabled]="disabled">
+		<div *ngIf="automatic" class="auto-icon">
+			<os-icon name="automatic_small" size="small"></os-icon>
+		</div>
+		<div *ngIf="leadingIcon" class="icon">
+			<os-icon [name]="leadingIcon"></os-icon>
+		</div>
+		<input
+			#nativeElement
+			[tabindex]="disabled ? -1 : 1"
+			[readonly]="disabled"
+			(input)="onInput($event)"
+			[value]="value"
+			[placeholder]="disabled ? '' : placeholder"
+			(blur)="onBlur($event)"
+			(focus)="focus.emit()"
+			[class.alignRight]="alignRight"
+		/>
+		<os-icon class="error-mark" name="exclamation" [size]="[16, 24]"></os-icon>
+		<div *ngIf="required" class="required">
+			<os-icon name="asterisk" [size]="[16, 24]"></os-icon>
+		</div>
+		<div *ngIf="trailingIcon" class="icon">
+			<os-icon [name]="trailingIcon"></os-icon>
+		</div>
+	</div>
+</div>

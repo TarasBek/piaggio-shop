@@ -1,0 +1,81 @@
+<div
+	#wrapper
+	class="select-wrapper"
+	[class.disabled]="disabled"
+	[class.multi]="multi"
+	(keydown)="onKeyPress($event, optionElements!)"
+	(focusout)="setOpened(false)"
+>
+	<span *ngIf="label" class="label" [class.boldLabel]="boldLabel" [innerHtml]="label"></span>
+	<div class="select-trigger" [tabindex]="disabled ? -1 : 1">
+		<div class="select-row" (click)="setOpenedEvent($event, true)">
+			<div *ngIf="automatic" class="automatic-icon">
+				<os-icon name="automatic_small" size="small"></os-icon>
+			</div>
+			<span *ngIf="!isFilter && placeholder && !hasValue" class="placeholder">
+				{{ placeholder }}
+			</span>
+			<span *ngIf="!isFilter && hasValue" class="value">
+				{{ displayValue }}
+			</span>
+			<input
+				#inputFilter
+				*ngIf="isFilter"
+				class="input-filter"
+				[placeholder]="placeholder"
+				(input)="onFilterInput($event)"
+				(focus)="filterValue = displayValue"
+				[value]="opened ? filterValue : displayValue"
+			/>
+			<div class="select-icon" (click)="setOpenedEvent($event, !opened)">
+				<span class="chevron" [class.opened]="opened"></span>
+			</div>
+		</div>
+
+		<div
+			*ngIf="opened"
+			class="select-dropdown"
+			[class.scrollbar]="scrollbar"
+			[style.max-height]="maxHeight"
+		>
+			<div
+				#item
+				class="select-option"
+				*ngIf="!required && !multi && emptyOption"
+				(click)="toggle()"
+				[class.active]="activeOption === null"
+			>
+				<span class="select-option-label placeholder"> --- </span>
+			</div>
+
+			<div #item class="select-option" *ngIf="allOption" (click)="toggleAll()">
+				<span *ngIf="multi" class="select-option-checkbox">
+					<os-checkbox
+						[createTabindex]="true"
+						[tristate]="true"
+						[value]="allChecked"
+						(click)="$event.stopPropagation(); toggleAll()"
+					></os-checkbox>
+				</span>
+				<span class="select-option-label">All</span>
+			</div>
+
+			<div
+				#item
+				class="select-option"
+				*ngFor="let option of isFilter ? _filteredOptions : _options; let i"
+				(click)="toggle(option)"
+				[class.active]="activeOption === option"
+			>
+				<span *ngIf="multi" class="select-option-checkbox">
+					<os-checkbox
+						[createTabindex]="false"
+						[value]="option.selected || null"
+						(click)="$event.stopPropagation(); toggle(option)"
+					></os-checkbox>
+				</span>
+				<span class="select-option-label" [innerHtml]="option.label"></span>
+			</div>
+		</div>
+	</div>
+</div>

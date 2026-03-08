@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 
-import { ServiceRoutingModule } from './service-routing.module';
-import { ServiceListComponent } from './pages/service-list/service-list.component';
-import { BookingComponent } from './pages/booking/booking.component';
 import { SharedModule } from '../../shared/shared.module';
+import { BookingComponent } from './pages/booking/booking.component';
+import { ServiceListComponent } from './pages/service-list/service-list.component';
+import { ServiceRoutingModule } from './service-routing.module';
 
 
 @NgModule({
@@ -14,8 +15,9 @@ import { SharedModule } from '../../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ServiceRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class ServiceModule { }

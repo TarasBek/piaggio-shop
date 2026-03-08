@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, take } from 'rxjs';
+
+import { ServiceDataActions } from '../../../service/state/service-data.actions';
+import {
+  selectBrandOptions,
+  selectBrandStatus,
+} from '../../../service/state/service-data.selectors';
 
 @Component({
   selector: 'app-home-main',
   standalone: false,
   templateUrl: './home-main.component.html',
-  styleUrls: ['./home-main.component.scss']
+  styleUrls: ['./home-main.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeMainComponent {
+export class HomeMainComponent implements OnInit {
+
 
   heroSlides = [
     {
@@ -27,14 +37,21 @@ export class HomeMainComponent {
         'https://images.unsplash.com/photo-1432753759888-b30b2bdac995?auto=format&fit=crop&w=1600&q=80',
       ctaLabel: 'Learn more',
     },
-  ];
+  ];brandOptions$: Observable<any | undefined>;
+  brandStatus$: Observable<any | undefined>;
+constructor(
+		
+		private readonly store: Store,
+	) {
 
-  brandOptions = [
-    { label: 'Piaggio', value: 'piaggio' },
-    { label: 'Vespa', value: 'vespa' },
-    { label: 'Aprilia', value: 'aprilia' },
-    { label: 'Moto Guzzi', value: 'moto-guzzi' },
-  ];
+		this.brandOptions$ = store.select(selectBrandOptions);
+    this.brandStatus$ = this.store.select(selectBrandStatus);
+	}
+
+  // readonly brandOptions$: Observable<
+  //   { label: string; value: string }[]
+  // > = this.store.select(selectBrandOptions);
+  // readonly brandStatus$ = this.store.select(selectBrandStatus);
 
   modelOptions = [
     { label: 'Primavera', value: 'primavera' },
@@ -218,5 +235,12 @@ export class HomeMainComponent {
       numScroll: 1,
     },
   ];
-  
+
+  ngOnInit(): void {
+    this.brandStatus$.pipe(take(1)).subscribe((status) => {
+      if (status === 'idle' || status === 'error') {
+        this.store.dispatch(ServiceDataActions.loadBrands());
+      }
+    });
+  }
 }

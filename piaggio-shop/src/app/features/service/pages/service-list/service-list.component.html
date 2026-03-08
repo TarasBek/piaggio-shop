@@ -1,1 +1,125 @@
-<p>service-list works!</p>
+<section class="service-panel">
+  <header class="service-panel__header">
+    <div>
+      <p class="section-eyebrow">Service booking</p>
+      <h2>Tell us about your ride</h2>
+      <p class="section-description">
+        Choose your scooter's brand, model, and year so we can pull the right
+        maintenance procedures from the workshop backend.
+      </p>
+    </div>
+    <button class="reload-btn" type="button" (click)="reloadBrands()">
+      Reload brands
+    </button>
+  </header>
+
+  <div class="service-panel__form">
+    <div class="form-field">
+      <label for="brand-select">Brand</label>
+      <select
+        id="brand-select"
+        [disabled]="(brandStatus$ | async) === 'loading'"
+        [ngModel]="(selectedBrandId$ | async) ?? ''"
+        (ngModelChange)="onBrandChange($event)"
+      >
+        <option value="">Select a brand</option>
+        <option
+          *ngFor="let brand of (brands$ | async); trackBy: trackById"
+          [value]="brand.id"
+        >
+          {{ brand.name }}
+        </option>
+      </select>
+      <small class="hint" *ngIf="(brandStatus$ | async) === 'loading'">
+        Loading brands...
+      </small>
+      <small class="hint error" *ngIf="(brandError$ | async) as error">
+        {{ error }}
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="model-select">Model</label>
+      <select
+        id="model-select"
+        [disabled]="!(selectedBrandId$ | async) || (modelStatus$ | async) === 'loading'"
+        [ngModel]="(selectedModelId$ | async) ?? ''"
+        (ngModelChange)="onModelChange($event)"
+      >
+        <option value="">Select a model</option>
+        <option
+          *ngFor="let model of (models$ | async); trackBy: trackById"
+          [value]="model.id"
+        >
+          {{ model.name }}
+        </option>
+      </select>
+      <small class="hint" *ngIf="(modelStatus$ | async) === 'loading'">
+        Fetching models...
+      </small>
+      <small class="hint error" *ngIf="(modelError$ | async) as error">
+        {{ error }}
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="year-select">Year</label>
+      <select
+        id="year-select"
+        [disabled]="!(selectedModelId$ | async) || (yearStatus$ | async) === 'loading'"
+        [ngModel]="(selectedYearId$ | async) ?? ''"
+        (ngModelChange)="onYearChange($event)"
+      >
+        <option value="">Select a year</option>
+        <ng-container *ngFor="let year of (years$ | async); trackBy: trackById">
+          <option [value]="year.id">{{ year.year }}</option>
+        </ng-container>
+      </select>
+      <small class="hint" *ngIf="(yearStatus$ | async) === 'loading'">
+        Collecting available years...
+      </small>
+      <small class="hint error" *ngIf="(yearError$ | async) as error">
+        {{ error }}
+      </small>
+    </div>
+  </div>
+</section>
+
+<section class="service-summary" *ngIf="summary$ | async as summary">
+  <h3>Your selection</h3>
+  <ul>
+    <li>
+      <strong>Brand:</strong>
+      <span>{{ summary.brand?.name || 'Not selected' }}</span>
+    </li>
+    <li>
+      <strong>Model:</strong>
+      <span>{{ summary.model?.name || 'Not selected' }}</span>
+    </li>
+    <li>
+      <strong>Year:</strong>
+      <span>{{ summary.year?.year || 'Not selected' }}</span>
+    </li>
+  </ul>
+</section>
+
+<section class="service-hints">
+  <h4>API status</h4>
+  <div class="status-grid">
+    <article>
+      <header>Brands</header>
+      <p>Status: {{ brandStatus$ | async }}</p>
+      <p>Items: {{ (brands$ | async)?.length ?? 0 }}</p>
+    </article>
+    <article>
+      <header>Models</header>
+      <p>Status: {{ modelStatus$ | async }}</p>
+      <p>Items: {{ (models$ | async)?.length ?? 0 }}</p>
+    </article>
+    <article>
+      <header>Years</header>
+      <p>Status: {{ yearStatus$ | async }}</p>
+      <p>Items: {{ (years$ | async)?.length ?? 0 }}</p>
+    </article>
+  </div>
+</section>

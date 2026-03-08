@@ -1,0 +1,116 @@
+:host[class~='warning'] {
+	.input-wrapper .input-row {
+		border: 1px solid var(--alarm-orange-color);
+		os-icon {
+			&.error-mark {
+				display: block;
+				--icon-color: var(--alarm-orange-color);
+			}
+		}
+	}
+}
+
+:host[class~='ng-invalid']:is([class*='ng-touched']),
+:host[class~='ng-invalid']:is([class~='ng-dirty']) {
+	.input-wrapper .input-row {
+		border: 1px solid var(--alarm-red-color);
+		os-icon {
+			&.error-mark {
+				display: block;
+				--icon-color: var(--alarm-red-color);
+			}
+		}
+	}
+}
+
+.alignRight {
+	text-align: right;
+}
+
+.input-wrapper {
+	page-break-inside: avoid;
+	.label + .input-row {
+		margin-top: 8px;
+	}
+	.input-row {
+		height: 30px;
+		display: flex;
+		width: calc(100% - 2px);
+		flex-direction: row;
+		align-items: center;
+		background-color: var(--input-background);
+		border: 1px solid var(--input-border);
+		&.number {
+			input {
+				text-align: right;
+			}
+		}
+		&.disabled {
+			border: 1px solid transparent;
+			background: var(--input-disabled-background);
+			input {
+				color: var(--input-disabled-color);
+				&::placeholder {
+					color: var(--input-disabled-color);
+				}
+			}
+		}
+		&.rtl {
+			flex-direction: row-reverse;
+			input {
+				text-align: right;
+				&::placeholder {
+					text-align: right;
+				}
+			}
+		}
+		.error-mark {
+			display: none;
+		}
+		.required {
+			margin-left: 4px;
+			margin-right: 4px;
+		}
+		.auto-icon {
+			height: 100%;
+			background-color: var(--input-auto-icon-background);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.icon {
+			margin: 4px;
+		}
+		input {
+			width: inherit;
+			flex-grow: 1;
+			margin: 8px;
+			padding: 0;
+			border: none;
+			background: transparent;
+			&::placeholder {
+				text-align: left;
+				color: var(--input-placeholder-color);
+			}
+		}
+	}
+}
+
+@media print {
+	.input-wrapper {
+		.input-row {
+			&:hover:not(.disabled) {
+				border: 1px solid var(--input-hover-border);
+				box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+			}
+			&:focus-within:not(.disabled) {
+				border: 1px solid var(--input-focus-border);
+			}
+			input {
+				&::placeholder {
+					color: transparent !important;
+				}
+			}
+		}
+	}
+}
