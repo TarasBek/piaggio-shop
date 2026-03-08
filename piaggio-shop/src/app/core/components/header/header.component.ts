@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/ auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  constructor(
+    private readonly router: Router,
+    private readonly authService: AuthService,
+  ) {}
 
   mainNav = [
     { label: 'Home', link: '/home', exact: true },
@@ -26,6 +32,27 @@ export class HeaderComponent {
 
   selectLanguage(lang: 'EN' | 'DE'): void {
     this.selectedLanguage = lang;
+  }
+
+  goToLogin(): void {
+    this.router.navigate(['/auth/login']);
+  }
+
+  goToAccount(): void {
+    this.router.navigate(['/auth/profile']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/home']);
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  get accountLabel(): string {
+    return this.authService.getDisplayName();
   }
 
 }

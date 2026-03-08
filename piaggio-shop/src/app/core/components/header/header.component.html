@@ -65,7 +65,14 @@
         <span aria-hidden="true">🛒</span>
         <span class="badge">2</span>
       </button>
-      <ve-button label="Customer login" type="primary"></ve-button>
+      @if (!isLoggedIn) {
+        <ve-button label="Customer login" type="primary" (click)="goToLogin()"></ve-button>
+      } @else {
+        <button class="account-button" type="button" (click)="goToAccount()">
+          {{ accountLabel }}
+        </button>
+        <button class="logout-button" type="button" (click)="logout()">Log out</button>
+      }
     </div>
   </div>
 </header>

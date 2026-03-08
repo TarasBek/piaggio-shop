@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../../core/guards/auth.guard';
 import { TitleRendererService } from '../../core/services/title-renderer.service';
 import { LoginComponent } from './pages/login/login.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
@@ -23,6 +25,12 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
         data: { title: 'Piaggio Shop — Register' },
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuard],
+        data: { title: 'Piaggio Shop — My Account' },
       },
     ],
   },

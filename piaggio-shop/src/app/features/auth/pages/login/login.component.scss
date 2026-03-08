@@ -1,0 +1,73 @@
+.login-page {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.login-card {
+  width: min(100%, 420px);
+  display: grid;
+  gap: 0.75rem;
+  background: #fff;
+  border: 1px solid #d7dbe4;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+h1 {
+  margin: 0;
+  color: #0f172a;
+}
+
+p {
+  margin: 0 0 0.5rem;
+  color: #475569;
+}
+
+label {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0e5c6a;
+  box-shadow: 0 0 0 3px rgba(14, 92, 106, 0.15);
+}
+
+button {
+  margin-top: 0.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: #0e5c6a;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.error {
+  color: #b91c1c;
+  font-size: 0.9rem;
+}
+
+.register-link {
+  color: #0e5c6a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.submitting {
+  color: #475569;
+  font-size: 0.9rem;
+}

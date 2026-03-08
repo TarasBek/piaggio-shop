@@ -1,0 +1,78 @@
+.profile-page {
+  padding: 2rem 1rem;
+}
+
+.profile-grid {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.profile-card {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1.25rem;
+  border: 1px solid #d7dbe4;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+h1,
+h2 {
+  margin: 0;
+  color: #0f172a;
+}
+
+p {
+  margin: 0 0 0.5rem;
+  color: #475569;
+}
+
+label {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0e5c6a;
+  box-shadow: 0 0 0 3px rgba(14, 92, 106, 0.15);
+}
+
+button {
+  margin-top: 0.35rem;
+  border: 0;
+  border-radius: 999px;
+  background: #0e5c6a;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout-btn {
+  background: #fff;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.success {
+  color: #047857;
+  font-size: 0.9rem;
+}
+
+.error {
+  color: #b91c1c;
+  font-size: 0.9rem;
+}

@@ -1,1 +1,116 @@
-<p>register works!</p>
+<section class="register-page">
+  <form class="register-card" (ngSubmit)="onSubmit()">
+    <h1>Client Registration</h1>
+    <p>Create your Piaggio Shop account and delivery profile.</p>
+
+    <label for="register-first-name">First name</label>
+    <input
+      id="register-first-name"
+      name="firstName"
+      type="text"
+      [(ngModel)]="firstName"
+      required
+      autocomplete="given-name"
+    />
+
+    <label for="register-last-name">Last name</label>
+    <input
+      id="register-last-name"
+      name="lastName"
+      type="text"
+      [(ngModel)]="lastName"
+      required
+      autocomplete="family-name"
+    />
+
+    <label for="register-email">Email</label>
+    <input
+      id="register-email"
+      name="email"
+      type="email"
+      [(ngModel)]="email"
+      required
+      autocomplete="email"
+    />
+
+    <label for="register-phone">Telephone</label>
+    <input
+      id="register-phone"
+      name="phone"
+      type="tel"
+      [(ngModel)]="phone"
+      required
+      autocomplete="tel"
+    />
+
+    <label for="register-address-line1">Home address</label>
+    <input
+      id="register-address-line1"
+      name="addressLine1"
+      type="text"
+      [(ngModel)]="addressLine1"
+      required
+      autocomplete="address-line1"
+    />
+
+  
+
+    <label for="register-city">City</label>
+    <input
+      id="register-city"
+      name="city"
+      type="text"
+      [(ngModel)]="city"
+      required
+      autocomplete="address-level2"
+    />
+
+    <label for="register-postal-code">Postal code</label>
+    <input
+      id="register-postal-code"
+      name="postalCode"
+      type="text"
+      [(ngModel)]="postalCode"
+      required
+      autocomplete="postal-code"
+    />
+
+    <label for="register-country">Country</label>
+    <input
+      id="register-country"
+      name="country"
+      type="text"
+      [(ngModel)]="country"
+      required
+      autocomplete="country-name"
+    />
+
+    <label for="register-password">Password</label>
+    <input
+      id="register-password"
+      name="password"
+      type="password"
+      [(ngModel)]="password"
+      required
+      autocomplete="new-password"
+    />
+
+    <label for="register-confirm-password">Confirm password</label>
+    <input
+      id="register-confirm-password"
+      name="confirmPassword"
+      type="password"
+      [(ngModel)]="confirmPassword"
+      required
+      autocomplete="new-password"
+    />
+
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+
+    <button type="submit">Register</button>
+    <div class="submitting" *ngIf="isSubmitting">Creating account...</div>
+
+    <a class="login-link" routerLink="/auth/login">Already have an account? Login</a>
+  </form>
+</section>

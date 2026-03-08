@@ -1,1 +1,32 @@
-<p>login works!</p>
+<section class="login-page">
+  <form class="login-card" (ngSubmit)="onSubmit()">
+    <h1>Customer Login</h1>
+    <p>Sign in to your Piaggio Shop account.</p>
+
+    <label for="email">Email</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      [(ngModel)]="email"
+      required
+      autocomplete="email"
+    />
+
+    <label for="password">Password</label>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      [(ngModel)]="password"
+      required
+      autocomplete="current-password"
+    />
+
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <button type="submit">Login</button>
+    <div class="submitting" *ngIf="isSubmitting">Signing in...</div>
+    <a class="register-link" routerLink="/auth/register">New client? Register here</a>
+  </form>
+</section>
