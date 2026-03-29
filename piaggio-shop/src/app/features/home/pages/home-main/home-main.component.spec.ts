@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { provideMockStore } from '@ngrx/store/testing';
+import { Router } from '@angular/router';
 import { SelectModule } from 'primeng/select';
+import { of } from 'rxjs';
 
 import { SharedModule } from '../../../../shared/shared.module';
-import { selectBrandOptions, selectBrandStatus } from '../../../service/state/service-data.selectors';
+import { ServiceApiService } from '../../../service/data-access/service-api.service';
 import { HomeMainComponent } from './home-main.component';
 
 describe('HomeMainComponent', () => {
@@ -19,12 +20,23 @@ describe('HomeMainComponent', () => {
       declarations: [HomeMainComponent],
       imports: [CommonModule, FormsModule, SelectModule, SharedModule, NoopAnimationsModule],
       providers: [
-        provideMockStore({
-          selectors: [
-            { selector: selectBrandOptions, value: [] },
-            { selector: selectBrandStatus, value: 'idle' },
-          ],
-        }),
+        {
+          provide: ServiceApiService,
+          useValue: {
+            getBrands: () => of([]),
+            getModels: () => of([]),
+            getCcs: () => of([]),
+            getYears: () => of([]),
+            getFrameTypes: () => of([]),
+            getCategories: () => of([]),
+          },
+        },
+        {
+          provide: Router,
+          useValue: {
+            navigate: jasmine.createSpy('navigate'),
+          },
+        },
       ],
     })
       .compileComponents();

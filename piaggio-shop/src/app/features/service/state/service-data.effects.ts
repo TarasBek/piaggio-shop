@@ -50,8 +50,8 @@ export class ServiceDataEffects {
   readonly loadYears$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ServiceDataActions.loadYears),
-      switchMap(({ modelId }) =>
-        this.api.getYears(modelId).pipe(
+      switchMap(({ modelId, cc }) =>
+        this.api.getYears(modelId, cc).pipe(
           map((years) => ServiceDataActions.loadYearsSuccess({ years })),
           catchError((error) =>
             of(
@@ -77,7 +77,7 @@ export class ServiceDataEffects {
     this.actions$.pipe(
       ofType(ServiceDataActions.selectModel),
       filter(({ modelId }) => !!modelId),
-      map(({ modelId }) => ServiceDataActions.loadYears({ modelId: modelId! })),
+      map(({ modelId }) => ServiceDataActions.loadYears({ modelId: modelId! , cc: 0 })),
     ),
   );
 

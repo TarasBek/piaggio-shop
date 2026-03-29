@@ -38,7 +38,7 @@ export class ServiceDataActions {
 
   static readonly loadYears = createAction(
     '[Service Data] Load Years',
-    props<{ modelId: string }>(),
+    props<{ modelId: string , cc: number}>(),
   );
   static readonly loadYearsSuccess = createAction(
     '[Service Data] Load Years Success',

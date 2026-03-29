@@ -16,6 +16,13 @@ export interface VehicleYear {
   year: number;
 }
 
+export interface VehicleCategory {
+  id: string;
+  name: string;
+  imageUrl?: string;
+  description?: string;
+}
+
 export type LoadState = 'idle' | 'loading' | 'success' | 'error';
 
 export interface VehicleDataState {

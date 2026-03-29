@@ -6,51 +6,142 @@
       <div class="filters">
         <div class="filter-control">
           <label for="brandSelect">Brand</label>
-          <p-select
-            inputId="brandSelect"
-            [options]="(brandOptions$ | async) ?? []"
-            optionLabel="label"
-            optionValue="value"
-            [(ngModel)]="selectedBrand"
-            placeholder="Choose a brand"
-            [editable]="true"
-            appendTo="body"
-            [disabled]="(brandStatus$ | async) === 'loading'"
-          ></p-select>
-          <small class="hint" *ngIf="(brandStatus$ | async) === 'loading'">
+          <select
+            id="brandSelect"
+            [disabled]="brandStatus === 'loading'"
+            [ngModel]="selectedBrandId ?? ''"
+            (ngModelChange)="onBrandChange($event)"
+          >
+            <option value="">Choose a brand</option>
+            <option *ngFor="let brand of brandOptions" [value]="brand.value">
+              {{ brand.label }}
+            </option>
+          </select>
+          <small class="hint" *ngIf="brandStatus === 'loading'">
             Loading brands...
           </small>
+          <small class="hint error" *ngIf="brandError as error">{{ error }}</small>
         </div>
         <div class="filter-control">
           <label for="modelSelect">Model</label>
-          <p-select
-            inputId="modelSelect"
-            [options]="modelOptions"
-            optionLabel="label"
-            optionValue="value"
-            [(ngModel)]="selectedModel"
-            placeholder="Choose a model"
-            [editable]="true"
-            appendTo="body"
-          ></p-select>
+          <select
+            id="modelSelect"
+            [disabled]="!selectedBrandId || modelStatus === 'loading'"
+            [ngModel]="selectedModelId ?? ''"
+            (ngModelChange)="onModelChange($event)"
+          >
+            <option value="">Choose a model</option>
+            <option *ngFor="let model of modelOptions" [value]="model.value">
+              {{ model.label }}
+            </option>
+          </select>
+          <small class="hint" *ngIf="modelStatus === 'loading'">
+            Loading models...
+          </small>
+          <small class="hint error" *ngIf="modelError as error">{{ error }}</small>
+        </div>
+        <div class="filter-control">
+          <label for="ccSelect">СС</label>
+          <select
+            id="ccSelect"
+            [disabled]="!selectedModelId || ccStatus === 'loading'"
+            [ngModel]="selectedCc ?? ''"
+            (ngModelChange)="onCcChange($event)"
+          >
+            <option value="">Choose CC</option>
+            <option *ngFor="let cc of ccOptions" [value]="cc.value">
+              {{ cc.label }}
+            </option>
+          </select>
+          <small class="hint" *ngIf="ccStatus === 'loading'">
+            Loading CC...
+          </small>
+          <small class="hint error" *ngIf="ccError as error">{{ error }}</small>
         </div>
         <div class="filter-control">
           <label for="yearSelect">Year</label>
-          <p-select
-            inputId="yearSelect"
-            [options]="yearOptions"
-            optionLabel="label"
-            optionValue="value"
-            [(ngModel)]="selectedYear"
-            placeholder="Choose a year"
-            [editable]="true"
-            appendTo="body"
-          ></p-select>
+          <select
+            id="yearSelect"
+            [disabled]="!selectedModelId || !selectedCc || yearStatus === 'loading'"
+            [ngModel]="selectedYearId ?? ''"
+            (ngModelChange)="onYearChange($event)"
+          >
+            <option value="">Choose a year</option>
+            <option *ngFor="let year of yearOptions" [value]="year.value">
+              {{ year.label }}
+            </option>
+          </select>
+          <small class="hint" *ngIf="yearStatus === 'loading'">
+            Loading years...
+          </small>
+          <small class="hint error" *ngIf="yearError as error">{{ error }}</small>
+        </div>
+        <div class="filter-control">
+          <label for="frameTypeSelect">Frame number</label>
+          <select
+            id="frameTypeSelect"
+            [disabled]="!selectedYearValue || frameTypeStatus === 'loading'"
+            [ngModel]="selectedFrameType ?? ''"
+            (ngModelChange)="onFrameTypeChange($event)"
+          >
+            <option value="">Choose a frame number</option>
+            <option *ngFor="let type of frameTypeOptions" [value]="type.value">
+              {{ type.label }}
+            </option>
+          </select>
+          <small class="hint" *ngIf="frameTypeStatus === 'loading'">
+            Loading frame numbers...
+          </small>
+          <small class="hint error" *ngIf="frameTypeError as error">{{ error }}</small>
         </div>
         <div class="filter-button">
-          <ve-button label="Find parts" type="primary"></ve-button>
+          <ve-button
+            label="Find parts"
+            type="primary"
+            [disabled]="!selectedFrameType"
+            (click)="onFindParts()"
+          ></ve-button>
         </div>
       </div>
+      <section class="model-categories" *ngIf="selectedModelId && selectedFrameType">
+        <div class="model-categories__header">
+          <h3>Choose exploded view category</h3>
+          <p>Select one category to continue to exact parts for this model.</p>
+        </div>
+
+        <small class="hint" *ngIf="categoryStatus === 'loading'">
+          Loading categories...
+        </small>
+        <small class="hint error" *ngIf="categoryError as error">{{ error }}</small>
+
+        <div class="model-categories__grid" *ngIf="categoryStatus === 'success' && modelCategories.length">
+          <article
+            class="model-category-card"
+            *ngFor="let category of modelCategories"
+            [class.active]="category.id === selectedCategoryId"
+            (click)="onCategorySelect(category.id)"
+          >
+            <img
+              *ngIf="category.imageUrl"
+              [src]="category.imageUrl"
+              [alt]="category.name"
+              loading="lazy"
+              appFallbackImg="category"
+            />
+            <h4>{{ category.name }}</h4>
+            <p *ngIf="category.description">{{ category.description }}</p>
+            <ve-button
+              label="Open details"
+              type="outline"
+              (click)="onCategoryDetails(category.id); $event.stopPropagation()"
+            ></ve-button>
+          </article>
+        </div>
+
+        <p class="model-categories__empty" *ngIf="categoryStatus === 'success' && !modelCategories.length">
+          No categories found for this model.
+        </p>
+      </section>
     </div>
   </div>
 

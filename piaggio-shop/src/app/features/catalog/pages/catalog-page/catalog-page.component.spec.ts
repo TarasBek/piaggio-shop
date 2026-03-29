@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { CatalogPageComponent } from './catalog-page.component';
 import { SharedModule } from '../../../../shared/shared.module';
@@ -13,6 +14,18 @@ describe('CatalogPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CatalogPageComponent],
       imports: [CommonModule, FormsModule, SharedModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              queryParamMap: {
+                get: () => null,
+              },
+            },
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CatalogPageComponent);

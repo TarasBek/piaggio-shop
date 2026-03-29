@@ -119,6 +119,8 @@
   border: 1px solid #e2e8f0;
   background: #fdfdfd;
   min-width: 220px;
+  width: 260px;
+  min-height: 122px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -132,10 +134,31 @@
   text-align: left;
 }
 
+.filter-control select {
+  width: 100%;
+  border: 1px solid #d7dbe4;
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  background: #fff;
+  font: inherit;
+  color: #0f172a;
+}
+
 .hint {
+  display: block;
   font-size: 0.75rem;
+  line-height: 1rem;
+  min-height: 1rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: #64748b;
   text-align: left;
+}
+
+.hint.error {
+  color: #b91c1c;
 }
 
 .filter-button {
@@ -143,6 +166,82 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.model-categories {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.model-categories__header h3 {
+  margin: 0;
+  color: #0e5c6a;
+  font-size: 1.25rem;
+}
+
+.model-categories__header p {
+  margin: 8px 0 18px;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.model-categories__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.model-category-card {
+  border: 1px solid #dbe7ef;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 12px;
+  min-height: 192px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.model-category-card:hover {
+  border-color: #2b7a78;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(14, 92, 106, 0.12);
+}
+
+.model-category-card.active {
+  border-color: #116d5b;
+  box-shadow: 0 0 0 2px rgba(17, 109, 91, 0.2);
+}
+
+.model-category-card img {
+  width: 100%;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.model-category-card h4 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.model-category-card p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.8rem;
+  min-height: 32px;
+}
+
+.model-categories__empty {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 0.9rem;
 }
 
 .home-section {
@@ -372,6 +471,7 @@
 
   .filter-control {
     width: 100%;
+    min-height: 122px;
   }
 
   :host ::ng-deep .filter-control .p-select {

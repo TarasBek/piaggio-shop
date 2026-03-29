@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService, CustomerProfile } from '../../../../core/services/ auth.service';
 
@@ -24,6 +25,7 @@ export class ProfileComponent {
   newPassword = '';
   confirmNewPassword = '';
   profileMessage = '';
+  profileError = '';
   passwordMessage = '';
   passwordError = '';
 
@@ -49,8 +51,16 @@ export class ProfileComponent {
 
   saveProfile(): void {
     this.profileMessage = '';
-    this.authService.updateProfile(this.profile).subscribe((result) => {
-      this.profileMessage = result.message;
+    this.profileError = '';
+    this.authService.updateProfile(this.profile).subscribe({
+      next: (result) => {
+        this.profileMessage = result.message;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.profileError =
+          this.extractErrorMessage(error) ??
+          'Unable to update profile. Please try again.';
+      },
     });
   }
 
@@ -67,16 +77,21 @@ export class ProfileComponent {
       return;
     }
 
-    this.authService.changePassword(this.currentPassword, this.newPassword).subscribe((result) => {
-      if (result.message.toLowerCase().includes('incorrect')) {
-        this.passwordError = result.message;
-        return;
-      }
-      this.passwordMessage = result.message;
-      this.currentPassword = '';
-      this.newPassword = '';
-      this.confirmNewPassword = '';
-    });
+    this.authService
+      .changePassword(this.currentPassword, this.newPassword)
+      .subscribe({
+        next: (result) => {
+          this.passwordMessage = result.message;
+          this.currentPassword = '';
+          this.newPassword = '';
+          this.confirmNewPassword = '';
+        },
+        error: (error: HttpErrorResponse) => {
+          this.passwordError =
+            this.extractErrorMessage(error) ??
+            'Unable to change password. Please try again.';
+        },
+      });
   }
 
   logout(): void {
@@ -84,4 +99,29 @@ export class ProfileComponent {
     this.router.navigate(['/home']);
   }
 
+  private extractErrorMessage(error: HttpErrorResponse): string | null {
+    const payload = error.error;
+    if (typeof payload === 'string' && payload.trim()) {
+      try {
+        const parsed = JSON.parse(payload) as { message?: string };
+        if (parsed.message && parsed.message.trim()) {
+          return parsed.message;
+        }
+      } catch {
+        return payload;
+      }
+    }
+
+    if (
+      payload &&
+      typeof payload === 'object' &&
+      'message' in payload &&
+      typeof payload.message === 'string' &&
+      payload.message.trim()
+    ) {
+      return payload.message;
+    }
+
+    return null;
+  }
 }

@@ -11,7 +11,13 @@
       <input id="profile-last-name" name="lastName" [(ngModel)]="profile.lastName" required />
 
       <label for="profile-email">Email</label>
-      <input id="profile-email" name="email" type="email" [(ngModel)]="profile.email" required />
+      <input
+        id="profile-email"
+        name="email"
+        type="email"
+        [(ngModel)]="profile.email"
+        readonly
+      />
 
       <label for="profile-phone">Telephone</label>
       <input id="profile-phone" name="phone" type="tel" [(ngModel)]="profile.phone" required />
@@ -30,37 +36,54 @@
       <input id="profile-country" name="country" [(ngModel)]="profile.country" required />
 
       <button type="submit">Save profile</button>
+      <div class="error" *ngIf="profileError">{{ profileError }}</div>
       <div class="success" *ngIf="profileMessage">{{ profileMessage }}</div>
     </form>
 
-    <form class="profile-card" (ngSubmit)="updatePassword()">
+    <form class="profile-card password-card" (ngSubmit)="updatePassword()">
       <h2>Change Password</h2>
       <p>Update your login password.</p>
 
-      <label for="current-password">Current password</label>
-      <input
-        id="current-password"
-        name="currentPassword"
-        type="password"
-        [(ngModel)]="currentPassword"
-        required
-      />
+      <div class="password-grid">
+        <div class="field">
+          <label for="current-password">Current password</label>
+          <input
+            id="current-password"
+            name="currentPassword"
+            type="password"
+            [(ngModel)]="currentPassword"
+            required
+          />
+        </div>
 
-      <label for="new-password">New password</label>
-      <input id="new-password" name="newPassword" type="password" [(ngModel)]="newPassword" required />
+        <div class="field">
+          <label for="new-password">New password</label>
+          <input
+            id="new-password"
+            name="newPassword"
+            type="password"
+            [(ngModel)]="newPassword"
+            required
+          />
+        </div>
 
-      <label for="confirm-new-password">Confirm new password</label>
-      <input
-        id="confirm-new-password"
-        name="confirmNewPassword"
-        type="password"
-        [(ngModel)]="confirmNewPassword"
-        required
-      />
+        <div class="field field-wide">
+          <label for="confirm-new-password">Confirm new password</label>
+          <input
+            id="confirm-new-password"
+            name="confirmNewPassword"
+            type="password"
+            [(ngModel)]="confirmNewPassword"
+            required
+          />
+        </div>
+      </div>
 
-      <button type="submit">Change password</button>
+      <button type="submit" class="change-password-btn">Change password</button>
+      <div class="password-feedback">
       <div class="error" *ngIf="passwordError">{{ passwordError }}</div>
       <div class="success" *ngIf="passwordMessage">{{ passwordMessage }}</div>
+      </div>
       <button class="logout-btn" type="button" (click)="logout()">Log out</button>
     </form>
   </div>

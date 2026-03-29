@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 type Availability = 'In stock' | 'Limited' | 'Pre-order';
 
@@ -61,7 +62,7 @@ interface SelectedFilters {
   templateUrl: './catalog-page.component.html',
   styleUrl: './catalog-page.component.scss',
 })
-export class CatalogPageComponent {
+export class CatalogPageComponent implements OnInit {
   categories: CatalogCategory[] = [
     {
       id: 'motor',
@@ -617,5 +618,21 @@ export class CatalogPageComponent {
 
   switchView(mode: 'grid' | 'list'): void {
     this.viewMode = mode;
+  }
+
+  constructor(private readonly route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    const categoryId = this.route.snapshot.queryParamMap.get('categoryId');
+    if (!categoryId) {
+      return;
+    }
+
+    const categoryExists = this.categories.some((category) => category.id === categoryId);
+    if (!categoryExists) {
+      return;
+    }
+
+    this.selectCategory(categoryId);
   }
 }

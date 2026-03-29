@@ -8,6 +8,7 @@
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start;
 }
 
 .profile-card {
@@ -75,4 +76,43 @@ button {
 .error {
   color: #b91c1c;
   font-size: 0.9rem;
+}
+
+.password-card {
+  align-self: start;
+  align-content: start;
+  height: fit-content;
+}
+
+.password-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 0.75rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field-wide {
+  grid-column: 1 / -1;
+}
+
+.change-password-btn {
+  margin-top: 0.25rem;
+}
+
+.password-feedback {
+  min-height: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .password-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field-wide {
+    grid-column: auto;
+  }
 }
